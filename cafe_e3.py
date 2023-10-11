@@ -1,6 +1,5 @@
 couriers_file = open('couriers.txt', 'a+') # Load products list
 couriers_doc = print(couriers_file.read())
-couriers_list = ["John" , "Claire"]
 products_file = open('products.txt', 'a+') # Load couriers lsit
 products_doc= print(products_file.read())
 products = ['Bacon Roll', 'Banana', 'Apple',
@@ -14,20 +13,22 @@ products_menu=("""
     2. Add New Products
     3. Update Products
     4. Delete Products
-    0. back to Main Menu""") # Layout of Products Menu
+    0. Back to Main Menu""") # Layout of Products Menu
 couriers_menu =("""
        Baking Cafe Couriers Menu
     =============================
     1. Couriers
     2. Add New Couriers
     3. Update Couriers
-    4. Delete Couriers""") # Layout of Couriers Menu
+    4. Delete Couriers
+    0. Back to Main Menu""") # Layout of Couriers Menu
 order = {'Customer_name':'Ben Conor',
          'Customer_address':'077438379',
          'Customer_phone': 'Unit 2, 12 Main Street, LONDON, WH1 2ER',
          'Status': 'Preparaing'}  # dictionary of order
 order_list = [] # lsit of orders
 status_list = [] # list of order status
+couriers_list = ['John' , 'Claire'] # list of couriers
 
 keep_looping = True
 while keep_looping == True: # main manu
@@ -89,7 +90,40 @@ while keep_looping == True: # main manu
 
       elif product_choice == '0': # exit product manu
           break
+
   elif menu_option == '2':
       while keep_looping == True:
           print(couriers_menu)
-          couriers_choice = input("Anything Related to Couriers")
+          couriers_choice = input("Anything Related to Couriers ? ")
+
+          if couriers_choice == '0': # back to Main Menu
+            break
+
+          elif couriers_choice == '1': # print couriers list
+                print(f"Couriers List\n{couriers_list}")
+
+          elif couriers_choice == '2':  # add new couriers
+            courier_name = input("Please Enter Couriers Name! ")
+            couriers_list.append(courier_name)
+            print(f"New Couriers List\n{couriers_list}")
+
+          elif couriers_choice == '3': # update existed couriers
+            ori_couriers_list = ['{}: {}'.format(c, courier) for c, courier in enumerate(couriers_list)]
+            print(ori_couriers_list)
+            courier_index = int(input("Please Enter the index of Couriers! "))
+            new_name = input("Please Type New Courier Name ! ")
+            if courier_index < len(ori_couriers_list):
+              couriers_list[courier_index] = new_name
+              print(f"Updated Couriers List\n{couriers_list}")
+            else:
+              print("Please Enter Corect Index! ")
+
+          elif couriers_choice == '4' : # delete couriers
+            ori_couriers_list = ['{}: {}'.format(c, courier) for c, courier in enumerate(couriers_list)]
+            print(ori_couriers_list)
+            courier_index = int(input("Who need to be deleted? Please Enter Index! "))
+            if courier_index < len(ori_couriers_list):
+              del couriers_list[courier_index]
+              print(f"Reduced Couriers List\n{couriers_list}")
+            else:
+              print("Please Enter Correct Index Value! ")

@@ -1,6 +1,6 @@
-couriers_file = open('couriers.txt', 'a+') # Load products list
+couriers_file = open('couriers.txt', 'w+') # Load products list
 couriers_doc = print(couriers_file.read())
-products_file = open('products.txt', 'a+') # Load couriers lsit
+products_file = open('products.txt', 'w+') # Load couriers lsit
 products_doc= print(products_file.read())
 products = products_doc # stores items for sales
 products_menu=("""

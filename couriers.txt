@@ -1,6 +1,6 @@
-John
-Claire
-Samson
-Simone
-Kenny
+John,
+Claire,
+Samson,
+Simone,
+Kenny,
 Kenndy

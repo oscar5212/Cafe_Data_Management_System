@@ -1,1 +1,9 @@
-'Bacon Roll', 'Banana', 'Apple','Ham & Chess Tosties', 'Chocolate','Latte', 'Cappuccino', 'Chia Latte','Macchiato'
+Bacon Roll
+Banana
+Apple
+Ham & Chess Tosties
+Chocolate
+Latte
+Cappuccino
+Chia Latte
+Macchiato

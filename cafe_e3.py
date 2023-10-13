@@ -2,10 +2,7 @@ couriers_file = open('couriers.txt', 'a+') # Load products list
 couriers_doc = print(couriers_file.read())
 products_file = open('products.txt', 'a+') # Load couriers lsit
 products_doc= print(products_file.read())
-products = ['Bacon Roll', 'Banana', 'Apple',
-            'Ham & Chess Tosties', 'Chocolate',
-            'Latte', 'Cappuccino', 'Chia Latte',
-            'Macchiato'] # stores items for sales
+products = products_doc # stores items for sales
 products_menu=("""
       Baking Cafe Product Menu
     ===========================
@@ -38,7 +35,7 @@ order = {'Customer_name':'Ben Conor',
          'Status': 'Preparaing'}  # dictionary of order
 order_list = [] # lsit of orders
 status_list = [] # list of order status
-couriers_list = ['John' , 'Claire'] # list of couriers
+couriers_list = couriers_doc # list of couriers
 
 keep_looping = True
 while keep_looping == True: # main manu

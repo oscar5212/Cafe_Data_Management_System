@@ -1,8 +1,15 @@
-couriers_file = open('couriers.txt', 'w+') # Load products list
-couriers_doc = print(couriers_file.read())
-products_file = open('products.txt', 'w+') # Load couriers lsit
-products_doc= print(products_file.read())
-products = products_doc # stores items for sales
+
+prodcuts = []                               # stores items for sales
+products_file = open('products.txt', 'r+') # Load products lsit
+products_doc= products_file.readlines()
+for product in products_doc:
+  prodcuts.append(product.strip('\n'))
+
+couriers_list = []                               # stores items for sales
+couriers_file = open('couriers.txt', 'r+') # Load products lsit
+couriers_doc= couriers_file.readlines()
+for name in couriers_doc:
+  couriers_list.append(name.strip('\n'))
 products_menu=("""
       Baking Cafe Product Menu
     ===========================
@@ -35,7 +42,6 @@ order = {'Customer_name':'Ben Conor',
          'Status': 'Preparaing'}  # dictionary of order
 order_list = [] # lsit of orders
 status_list = [] # list of order status
-couriers_list = couriers_doc # list of couriers
 
 keep_looping = True
 while keep_looping == True: # main manu
@@ -49,11 +55,11 @@ while keep_looping == True: # main manu
   menu_option = input('Which menu?')
 
   if menu_option == '0':       #  save lists to txt files
-    for product in products:
-        products_file.write(product)
+    for product in prodcuts:
+        products_file.write(product + "\n")
     products_file.close()
     for courier in couriers_list:
-        couriers_file.write(courier)
+        couriers_file.write(courier + "\n")
     couriers_file.close()
     break
 
@@ -63,35 +69,35 @@ while keep_looping == True: # main manu
       product_choice = input('What are you going to do? ')
 
       if product_choice == '1':   # identifies Products in 1
-        for p in products:
+        for p in prodcuts:
           print(f'Products: {p}')
 
       elif product_choice == '2': #add new products
           option_2 = input ('Please enter a product name! ')
           print(option_2)
-          products.append(option_2)
-          print(products)
+          prodcuts.append(option_2)
+          print(prodcuts)
 
       elif product_choice == '3': #update existing products
-          products_list = ['{}: {}'.format(p, product) for p, product in enumerate(products)]
+          products_list = ['{}: {}'.format(p, product) for p, product in enumerate(prodcuts)]
           print(products_list)
           index_product = input ('Please Enter the index of Prodcuts! ')
           update_pro_name = input ('Please Update the name of Prodoucts! ')
           index_item = int(index_product)
-          if index_item < len(products):
-            products[index_item] = update_pro_name
-            print(products)
-          elif index_item >= len(products):
+          if index_item < len(prodcuts):
+            prodcuts[index_item] = update_pro_name
+            print(prodcuts)
+          elif index_item >= len(prodcuts):
             print(f"Invalid index detected! Please enter index! ")
 
       elif product_choice == '4': # delete existing products
-          products_list = ['{}: {}'.format(p, product) for p, product in enumerate(products)]
+          products_list = ['{}: {}'.format(p, product) for p, product in enumerate(prodcuts)]
           print(products_list)
           index_product = input ('Please Enter the index of Prodcuts! ')
           index_item = int(index_product)
-          if index_item < len(products):
-            del products[index_item]
-            print(products)
+          if index_item < len(prodcuts):
+            del prodcuts[index_item]
+            print(prodcuts)
           else:
             print("Please insert a correct index of products! ")
 

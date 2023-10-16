@@ -6,10 +6,9 @@ for product in products_doc:
   prodcuts.append(product.strip('\n'))
 
 couriers_list = []                               # stores items for sales
-couriers_file = open('couriers.txt', 'r+') # Load products lsit
-couriers_doc= couriers_file.readlines()
-for name in couriers_doc:
-  couriers_list.append(name.strip('\n'))
+couriers_file = open('couriers.txt', 'w+') # Load products lsit
+for couriers_name in couriers_file.readlines():
+  couriers_list.append(couriers_name.strip('\n'))
 products_menu=("""
       Baking Cafe Product Menu
     ===========================
@@ -58,8 +57,8 @@ while keep_looping == True: # main manu
     for product in prodcuts:
         products_file.write(product + "\n")
     products_file.close()
-    for courier in couriers_list:
-        couriers_file.write(courier + "\n")
+    for couriers_name in couriers_list:
+        couriers_file.write(couriers_name + "\n")
     couriers_file.close()
     break
 

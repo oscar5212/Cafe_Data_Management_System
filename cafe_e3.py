@@ -1,12 +1,12 @@
 
 prodcuts = []                               # stores items for sales
-products_file = open('products.txt', 'r+') # Load products lsit
+products_file = open('generation_mini_project/products.txt', 'r+') # Load products lsit
 products_doc= products_file.readlines()
 for product in products_doc:
   prodcuts.append(product.strip('\n'))
 
 couriers_list = []                               # stores items for sales
-couriers_file = open('delivery.txt', 'r+') # Load products lsit
+couriers_file = open('generation_mini_project/delivery.txt', 'r+') # Load products lsit
 for couriers_name in couriers_file.readlines():
   couriers_list.append(couriers_name.strip('\n'))
 products_menu=("""
@@ -55,10 +55,10 @@ while keep_looping == True: # main manu
 
   if menu_option == '0':       #  save lists to txt files
     for product in prodcuts:
-        products_file.write(product + "\n")
+        products_file.write("\n" + product + "\n")
     products_file.close()
     for couriers_name in couriers_list:
-        couriers_file.write(couriers_name + "\n")
+        couriers_file.write("\n" + couriers_name + "\n")
     couriers_file.close()
     break
 

@@ -6,7 +6,7 @@ for product in products_doc:
   prodcuts.append(product.strip('\n'))
 
 couriers_list = []                               # stores items for sales
-couriers_file = open('couriers.txt', 'w+') # Load products lsit
+couriers_file = open('delivery.txt', 'r+') # Load products lsit
 for couriers_name in couriers_file.readlines():
   couriers_list.append(couriers_name.strip('\n'))
 products_menu=("""

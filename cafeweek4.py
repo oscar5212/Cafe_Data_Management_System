@@ -157,7 +157,7 @@ while keep_looping == True:
             })
         exit
     if main_option == "1":  # Enter Product Menu
-        while keep_looping == True:
+        while True:
             product_menu()
             products_option = input("Please Enter Number for Corresponding Actions! ")
             if products_option == "0":  # Back to Main Menu
@@ -181,7 +181,7 @@ while keep_looping == True:
 
 
     elif main_option == "2": # Enter Couriers Menu
-        while keep_looping == True:
+        while True:
             courier_menu()
             couriers_option = input("Please Enter Number for Corresponding Actions! ")
             if couriers_option == "0":  # Back to Main Menu
@@ -204,7 +204,7 @@ while keep_looping == True:
 
 
     elif main_option == "3":       # getting into order menu
-        while keep_looping == True:
+        while True:
             order_menu()
             orders_option = input("Please Enter Number for Corresponding Actions! ")
             if orders_option == "0":  # Back to Main Menu

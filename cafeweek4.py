@@ -15,6 +15,13 @@ def load_couriers_file():
         for courier in couriers_file:
             couriers_list.append(courier)
 
+orders_list = []
+def load_orders_file():
+    with open("orders.csv", "r+") as csv_orders:
+        orders_file = csv.DictReader(csv_orders)
+        for order in orders_file:
+            orders_list.append(order)
+
 def main_menu():              # Main Menu
     print("===Baking Cafe===")
     print("==================")
@@ -54,7 +61,7 @@ def del_product():  # Deleting Product
     products_index = int(input("Which needs to be deleted? Please Enter Index! "))
     if products_index < len(ori_products_list):
       del prodcuts_list[products_index]
-      print(f"Reduced Products List\n{prodcuts_list}".lstrip().strip("{}[").replace(",", "\n").replace("]", "\n"))
+      print(f"Reduced Products List\n{prodcuts_list}".lstrip("{}[").replace(",", "\n").replace("]", "\n"))
     else:
       print("Please Enter Correct Index Value! ")
 def courier_menu():            # Main Menu
@@ -67,6 +74,31 @@ def courier_menu():            # Main Menu
     print("==0) Back to Main Menu==")
     print("========================")
 
+def update_couriers(): # Updating Product List
+    print("Couriers:")
+    for index, courier in enumerate(couriers_list):
+        print("Courier ID :", index, "\n", str(courier).lstrip('{}"').replace(",", "\n").replace("'", " "),"\n********")
+        courier_index = int(input("Enter order index to update: "))
+        if courier_index < len(couriers_list):
+            for key in couriers_list[courier_index]:
+                new_value = input(f"Enter new {key} (press enter to keep current value): ")
+                if new_value != "":
+                    couriers_list[courier_index][key] = new_value
+                    print("Couriers updated successfully.")
+                    print("Updated Courier\n" + str(couriers_list).lstrip('{}"').replace(",", "\n").replace("[", "\n").replace("]", "\n********"))
+
+def del_courier():  # Deleting Couriers
+    print("Couriers:")
+    ori_couriers_list = ['Index {}: {}\n'.strip('[]"').format(c, courier) for c, courier in enumerate(couriers_list)]
+    print(ori_couriers_list)
+    couriers_index = int(input("Which needs to be deleted? Please Enter Index! "))
+    if couriers_index < len(ori_couriers_list):
+      del couriers_list[couriers_index]
+      print(f"Updated Couriers List\n{couriers_list}".lstrip("{}[").replace(",", "\n").replace("]", "\n"))
+    else:
+      print("Please Enter Correct Index Value! ")
+
+
 def order_menu():             # Main Menu
     print("=====Orders Menu====")
     print("======================")
@@ -77,8 +109,12 @@ def order_menu():             # Main Menu
     print("==5) Delete Products==")
     print("=0) Back to Main Menu=")
     print("======================")
+
+# Start of Baker Cafe Terminal
+
 load_products_file() # Loading Product File
 load_couriers_file() # Loading Couriers File
+load_orders_file()   # Loading Orders File
 keep_looping = True
 while keep_looping == True:
     main_menu()    # calling Main Menu
@@ -105,6 +141,20 @@ while keep_looping == True:
                 "name": "Bacon Roll",
                 "price": "1.3",
             })
+
+        with open("orders.csv", "w+") as new_orders_csv:    # writing orders file
+            fieldnames_o = ["customer_name", "customer_address", "customer_phone", "courier", "status", "items"]
+            writer_o = csv.DictWriter(new_orders_csv, fieldnames=fieldnames_o)
+
+            writer_o.writeheader()
+            writer_o.writerows({
+                "customer_name": "John",
+                "customer_address": "Unit 2, 12 Main Street, LONDON, WH1 2ER",
+                "customer_phone": "0789887334",
+                "courier": 2,
+                "status": "preparing",
+                "items": "1, 3, 4"
+            })
         exit
     if main_option == "1":  # Enter Product Menu
         while keep_looping == True:
@@ -129,7 +179,8 @@ while keep_looping == True:
             elif products_option == "4": # Delete Products
                 del_product()
 
-    if main_option == "2": # Enter Couriers Menu
+
+    elif main_option == "2": # Enter Couriers Menu
         while keep_looping == True:
             courier_menu()
             couriers_option = input("Please Enter Number for Corresponding Actions! ")
@@ -147,11 +198,27 @@ while keep_looping == True:
                 couriers_list.append(new_couriers_dict)
                 print(str(couriers_list).strip("[").replace("]", "\n").replace(",", "\n"))
             elif couriers_option == "3":  # Updating Couriers List
-                
+                update_couriers()
+            elif couriers_option == "4":  # Deleting Couriers from List
+                del_courier()
 
 
-
-
-
-
-# print(str(couriers_list).strip("[").replace("]", "\n").replace(",", "\n"))
+    elif main_option == "3":       # getting into order menu
+        while keep_looping == True:
+            order_menu()
+            orders_option = input("Please Enter Number for Corresponding Actions! ")
+            if orders_option == "0":  # Back to Main Menu
+                break
+            elif orders_option == "1":  # List all the existed orders
+                print(str(orders_list).strip("[{}").replace("]", "\n").replace(",", "\n"))
+            elif orders_option == "2":   # Add new orders
+                new_customer_name = input("Please Enter Your Name. ")
+                new_customer_address = input("Please Enter Your Address. ")
+                new_customer_phoner = input("Please Enter Your Phone Number.")
+                print("Products:")
+                ori_products_list = ['Index {}: {}\n'.strip('[]"').format(p, product) for p, product in enumerate(ori_products_list)]
+                print(ori_products_list)
+                new_item = input("Please Entre ID of Your Items. (with comma separating each item)")
+                ori_couriers_list = ['Index {}: {}\n'.strip('[]"').format(c, courier) for c, courier in enumerate(couriers_list)]
+                print(ori_couriers_list)
+                new_courier = int(input(""))

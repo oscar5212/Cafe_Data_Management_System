@@ -64,7 +64,7 @@ def del_product():  # Deleting Product
       print(f"Reduced Products List\n{prodcuts_list}".lstrip("{}[").replace(",", "\n").replace("]", "\n"))
     else:
       print("Please Enter Correct Index Value! ")
-def courier_menu():            # Main Menu
+def courier_menu():            # Couriers Menu
     print("Couriers Menu")
     print("========================")
     print("====1) Couriers List====")
@@ -74,7 +74,7 @@ def courier_menu():            # Main Menu
     print("==0) Back to Main Menu==")
     print("========================")
 
-def update_couriers(): # Updating Product List
+def update_couriers(): # Updating Couriers List
     print("Couriers:")
     for index, courier in enumerate(couriers_list):
         print("Courier ID :", index, "\n", str(courier).lstrip('{}"').replace(",", "\n").replace("'", " "),"\n********")
@@ -99,13 +99,13 @@ def del_courier():  # Deleting Couriers
       print("Please Enter Correct Index Value! ")
 
 
-def order_menu():             # Main Menu
+def order_menu():             # order Menu
     print("=====Orders Menu====")
     print("======================")
-    print("==1) Orders List====")
-    print("==2) Add Orders=====")
-    print("==3) Update Status==")
-    print("==4) Update Orders")
+    print("===1) Orders List=====")
+    print("===2) Add Orders======")
+    print("===3) Update Status===")
+    print("===4) Update Orders===")
     print("==5) Delete Products==")
     print("=0) Back to Main Menu=")
     print("======================")

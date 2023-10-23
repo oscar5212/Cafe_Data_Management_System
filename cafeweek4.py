@@ -1,11 +1,11 @@
 import csv
 
-prodcuts_list =[]
+products_list =[]
 def load_products_file():
     with open("products.csv", "r+") as csv_products:
         prodcuts_file = csv.DictReader(csv_products)
         for product in prodcuts_file:
-            prodcuts_list.append(product)
+            products_list.append(product)
 
 
 couriers_list = []
@@ -43,25 +43,25 @@ def product_menu():            # Main Menu
 
 def update_product(): # Updating Product List
     print("Products:")
-    for index, product in enumerate(prodcuts_list):
+    for index, product in enumerate(products_list):
         print("Order ID :", index, "\n", str(product).replace("{", " ").replace("}", " ").replace(",", "\n").replace('"', ' ').replace("'", " "),"\n********")
         product_index = int(input("Enter order index to update: "))
-        if product_index < len(prodcuts_list):
-            for key in prodcuts_list[product_index]:
+        if product_index < len(products_list):
+            for key in products_list[product_index]:
                 new_value = input(f"Enter new {key} (press enter to keep current value): ")
                 if new_value != "":
-                    prodcuts_list[product_index][key] = new_value
+                    products_list[product_index][key] = new_value
                     print("Products updated successfully.")
-                    print("Updated Product\n" + str(prodcuts_list).replace("{", " ").replace("}", " ").replace(",", "\n").replace('"', ' ').replace("'", " ").replace("[", "\n").replace("]", "\n********"))
+                    print("Updated Product\n" + str(products_list).replace("{", " ").replace("}", " ").replace(",", "\n").replace('"', ' ').replace("'", " ").replace("[", "\n").replace("]", "\n********"))
 
 def del_product():  # Deleting Product
     print("Products:")
-    ori_products_list = ['Index {}: {}\n'.strip('[]"').format(p, product) for p, product in enumerate(prodcuts_list)]
+    ori_products_list = ['Index {} : {}'.strip('[]"').format(p, product) for p, product in enumerate(products_list)]
     print(ori_products_list)
     products_index = int(input("Which needs to be deleted? Please Enter Index! "))
     if products_index < len(ori_products_list):
-      del prodcuts_list[products_index]
-      print(f"Reduced Products List\n{prodcuts_list}".lstrip("{}[").replace(",", "\n").replace("]", "\n"))
+      del products_list[products_index]
+      print(f"Reduced Products List\n{products_list}".lstrip("{}[").replace(",", "\n").replace("]", "\n"))
     else:
       print("Please Enter Correct Index Value! ")
 def courier_menu():            # Couriers Menu
@@ -77,7 +77,7 @@ def courier_menu():            # Couriers Menu
 def update_couriers(): # Updating Couriers List
     print("Couriers:")
     for index, courier in enumerate(couriers_list):
-        print("Courier ID :", index, "\n", str(courier).lstrip('{}"').replace(",", "\n").replace("'", " "),"\n********")
+        print("Courier ID :", index, "\n", str(courier).strip('{}"').replace(",", "\n").replace("'", " "),"\n********")
         courier_index = int(input("Enter order index to update: "))
         if courier_index < len(couriers_list):
             for key in couriers_list[courier_index]:
@@ -132,7 +132,7 @@ def update_orders_status():    # Updating Orders Status
 def update_orders(): # Updating Orders List
     print("orders:")
     for index, order in enumerate(orders_list):
-        print("Order ID :", index, "\n", str(order).strip('{}"').replace(",", "\n").replace("'", " "),"\n********")
+        print("Order ID :", index, str(order).strip('{}"').replace(",", "\n").replace("'", " "),"\n********")
         order_index = int(input("Enter order index to update: "))
         if order_index < len(orders_list):
             for key in orders_list[order_index]:
@@ -144,7 +144,7 @@ def update_orders(): # Updating Orders List
 
 def del_order():  # Deleting Orders
     print("Orders:")
-    ori_orders_list = ['Index {}: {}\n'.strip('[]"').format(o, order) for o, order in enumerate(orders_list)]
+    ori_orders_list = ['Index {}: {}'.strip('[]"').format(o, order) for o, order in enumerate(orders_list)]
     print(ori_orders_list)
     orders_index = int(input("Which needs to be deleted? Please Enter Index! "))
     if orders_index < len(ori_orders_list):
@@ -195,7 +195,7 @@ while True:
                 "customer_phone": "0789887334",
                 "courier": 2,
                 "status": "preparing",
-                "items": "1, 3, 4"
+                "items": "1 & 3 & 4"
             })
         exit
     if main_option == "1":  # Enter Product Menu
@@ -205,19 +205,19 @@ while True:
             if products_option == "0":  # Back to Main Menu
                 break
             elif products_option == "1":  # Looking for Available Products
-                print(str(prodcuts_list).strip("[").replace("]", "\n").replace(",", "\n"))
+                print(str(products_list).strip("[").replace("]", "\n").replace(",", "\n"))
             elif products_option == "2":  # Adding New Products with Price
                 new_product = input("New Product")
-                new_price = input("Price")
+                new_price = float(input("Price"))
                 new_products_dict = {
                     "name": new_product,
                     "price": new_price
                 }
-                prodcuts_list.append(new_products_dict)
-                print(str(prodcuts_list).strip("[").replace("]", "\n").replace(",", "\n"))
+                products_list.append(new_products_dict)
+                print(str(products_list).strip("[").replace("]", "\n").replace(",", "\n"))
             elif products_option == "3": # Update products list
                 update_product()
-                print(str(prodcuts_list).lstrip("[").replace("]", "\n").replace(",", "\n"))
+                print(str(products_list).lstrip("[").replace("]", "\n").replace(",", "\n"))
             elif products_option == "4": # Delete Products
                 del_product()
 
@@ -258,9 +258,9 @@ while True:
                 new_customer_address = input("Please Enter Your Address. ")
                 new_customer_phone = input("Please Enter Your Phone Number.")
                 print("Products:")
-                ori_products_list = ['Index {}: {}\n'.strip('[]"').format(p, product) for p, product in enumerate(ori_products_list)]
+                ori_products_list = ['Index {}: {}\n'.strip('[]"').format(p, product) for p, product in enumerate(products_list)]
                 print(ori_products_list)
-                new_order_item = input("Please Entre ID of Your Items. (with comma separating each item)")
+                new_order_item = input("Please Entre ID of Your Items. (with & separating each item)")
                 ori_couriers_list = ['Index {}: {}\n'.strip('[]"').format(c, courier) for c, courier in enumerate(couriers_list)]
                 print(ori_couriers_list)
                 new_order_courier = int(input("Please Choose an Available Courier's Index! "))

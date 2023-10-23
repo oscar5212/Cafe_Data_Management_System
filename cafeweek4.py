@@ -110,13 +110,55 @@ def order_menu():             # order Menu
     print("=0) Back to Main Menu=")
     print("======================")
 
+
+def update_orders_status():    # Updating Orders Status
+    print("orders:")
+    for index, order in enumerate(orders_list):
+        print("Order ID :", index, "\n", str(order).strip('{}"').replace(",", "\n").replace("'", " "),"\n********")
+        order_index = int(input("Enter order index to update: "))
+        print("Which stauts you want to change? ")
+        print("1) Preparing")
+        print("2) Ready to Be Delivered / Collected")
+        print("3) Already Delivered / Collected")
+        new_status = input("Which status? ")
+        if new_status == "1":
+            orders_list[order_index]["status"] = "Preparing"
+        elif new_status == "2":
+            orders_list[order_index]["status"] = "Ready to Be Delivered / Collected"
+        elif new_status == "3":
+            orders_list[order_index]["status"] = "Already Delivered / Collected"
+
+
+def update_orders(): # Updating Orders List
+    print("orders:")
+    for index, order in enumerate(orders_list):
+        print("Order ID :", index, "\n", str(order).strip('{}"').replace(",", "\n").replace("'", " "),"\n********")
+        order_index = int(input("Enter order index to update: "))
+        if order_index < len(orders_list):
+            for key in orders_list[order_index]:
+                new_value = input(f"Enter new {key} (press enter to keep current value): ")
+                if new_value != "":
+                    orders_list[order_index][key] = new_value
+                    print("Couriers updated successfully.")
+
+
+def del_order():  # Deleting Orders
+    print("Orders:")
+    ori_orders_list = ['Index {}: {}\n'.strip('[]"').format(o, order) for o, order in enumerate(orders_list)]
+    print(ori_orders_list)
+    orders_index = int(input("Which needs to be deleted? Please Enter Index! "))
+    if orders_index < len(ori_orders_list):
+      del orders_list[orders_index]
+      print(f"Updated Orders List\n{orders_list}".strip("{}[").replace(",", "\n").replace("]", "\n"))
+    else:
+      print("Please Enter Correct Index Value! ")
+
 # Start of Baker Cafe Terminal
 
 load_products_file() # Loading Product File
 load_couriers_file() # Loading Couriers File
 load_orders_file()   # Loading Orders File
-keep_looping = True
-while keep_looping == True:
+while True:
     main_menu()    # calling Main Menu
     main_option = input("What are you going to do? ")
 
@@ -214,11 +256,31 @@ while keep_looping == True:
             elif orders_option == "2":   # Add new orders
                 new_customer_name = input("Please Enter Your Name. ")
                 new_customer_address = input("Please Enter Your Address. ")
-                new_customer_phoner = input("Please Enter Your Phone Number.")
+                new_customer_phone = input("Please Enter Your Phone Number.")
                 print("Products:")
                 ori_products_list = ['Index {}: {}\n'.strip('[]"').format(p, product) for p, product in enumerate(ori_products_list)]
                 print(ori_products_list)
-                new_item = input("Please Entre ID of Your Items. (with comma separating each item)")
+                new_order_item = input("Please Entre ID of Your Items. (with comma separating each item)")
                 ori_couriers_list = ['Index {}: {}\n'.strip('[]"').format(c, courier) for c, courier in enumerate(couriers_list)]
                 print(ori_couriers_list)
-                new_courier = int(input(""))
+                new_order_courier = int(input("Please Choose an Available Courier's Index! "))
+                new_order_dict = {
+                    "custoemr_name": new_customer_name,
+                    "customer_address": new_customer_address,
+                    "customer_phone": new_customer_phone,
+                    "courier": new_order_courier,
+                    "status": "preparing",
+                    "items": new_order_item,
+                }
+                orders_list.append(new_order_dict)
+                print(str(orders_list).strip("[").replace("]", "\n").replace(",", "\n"))
+
+
+            elif orders_option == "3":  # Updating orders status
+                update_orders_status()
+
+            elif orders_option == "4": # Updating orders
+                update_orders()
+
+            elif orders_option == "5":  # Deleting orders
+                del_order()

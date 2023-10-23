@@ -1,6 +1,0 @@
-John,
-Claire,
-Samson,
-Simone,
-Kenny,
-Kenndy

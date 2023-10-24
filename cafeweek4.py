@@ -1,4 +1,7 @@
 import csv
+import db_product
+import db_courier
+import db_orders
 
 products_list =[]
 def load_products_file():

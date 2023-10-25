@@ -1,7 +1,16 @@
 import pymysql
-from cafeweek6 import order_menu
 
-print('Opening connection...')  # establish connection to mysql
+def order_menu():             # order Menu
+    print("=====Orders Menu====")
+    print("======================")
+    print("===1) Orders List=====")
+    print("===2) Add Orders======")
+    print("===3) Update Status===")
+    print("===4) Update Orders===")
+    print("==5) Delete Products==")
+    print("=0) Back to Main Menu=")
+    print("======================")
+
 conn = pymysql.connect(
 host='localhost',
 database='baking_cafe',
@@ -14,7 +23,6 @@ def orders():       # execute all the actions related to order menu
         order_menu()
         orders_option = input("Please Enter a Choice! ")
         if orders_option == "0":         # back to main menu
-            conn.close()
             break
         elif orders_option == "1":       # list all orders
             cur.execute("SELECT * FROM orders")
@@ -39,6 +47,7 @@ def orders():       # execute all the actions related to order menu
             try:
                 cur.execute("INSERT INTO orders (customer_name, customer_address, customer_phone, couriers, order_status_id, items ) VALUES (%s, %s, %s, %s, %s, %s)", (customer_name, customer_address, customer_phone, couriers, status, items))
                 conn.commit()
+                cur.execute("SELECT * FROM orders")
                 orders_list = cur.fetchall()
                 for order in orders_list:
                     print(order)
@@ -49,7 +58,6 @@ def orders():       # execute all the actions related to order menu
             orders_list = cur.fetchall()
             for order in orders_list:
                 print(order)
-            order_id = int(input("Enter ID of Orders!"))
             cur.execute("SELECT * FROM orders_status")
             orders_status_list = cur.fetchall()
             for order_status in orders_status_list:
@@ -89,7 +97,7 @@ def orders():       # execute all the actions related to order menu
             elif order_id == "":
                 pass
         elif orders_option == "5":   # delete product from product list
-            cur.execute("select * from orders")
+            cur.execute("SELECT * FROM orders")
             orders_list = cur.fetchall()
             for order in orders_list:
                 print(order)

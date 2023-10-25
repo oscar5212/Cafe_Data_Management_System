@@ -13,7 +13,7 @@ def main_menu():              # Main Menu
     print("=0) Exit==========")
     print("==================")
 
-def product_menu():            # Main Menu
+def product_menu():            # Product Menu
     print("=====Products Menu====")
     print("======================")
     print("==1) Products List====")
@@ -24,7 +24,7 @@ def product_menu():            # Main Menu
     print("======================")
 
 
-def courier_menu():            # Couriers Menu
+def courier_menu():            # Courier Menu
     print("Couriers Menu")
     print("========================")
     print("====1) Couriers List====")
@@ -60,6 +60,7 @@ database='baking_cafe',
 user='root',
 password='password')
 cur = conn.cursor()
+print('Connecting Database Successful! ')
 
 while True:
     main_menu()    # call Main Menu

@@ -55,8 +55,10 @@ def products():
                     pass
                 elif new_price == "" and new_name != "":
                     cur.execute("UPDATE couriers SET name = %s where id = %s", (new_name, product_id))
+                    conn.commit()
                 elif new_price != "" and new_name == "":
                     cur.execute("UPDATE couriers SET price = %s where id = %s", (new_price, product_id))
+                    conn.commit()
                 try:
                     cur.execute("UPDATE products SET name = %s, price = %s where id = %s", (new_name, new_price, product_id))
                     conn.commit()

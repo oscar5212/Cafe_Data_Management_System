@@ -1,7 +1,7 @@
 import pymysql
 
 def courier_menu():            # Courier Menu
-    print("Couriers Menu")
+    print("======Couriers Menu=====")
     print("========================")
     print("====1) Couriers List====")
     print("=====2) Add Couriers====")
@@ -54,8 +54,10 @@ def couriers():   # run all the actions related to courier menu
                     pass
                 elif new_phone == "" and new_name != "":
                     cur.execute("UPDATE couriers SET name = %s where id = %s", (new_name, courier_id))
+                    conn.commit()
                 elif new_phone != "" and new_name == "":
                     cur.execute("UPDATE couriers SET phone = %s where id = %s", (new_phone, courier_id))
+                    conn.commit()
                 try:
                     cur.execute("UPDATE couriers SET name = %s, phone = %s where id = %s", (new_name, new_phone, courier_id))
                     conn.commit()
@@ -65,15 +67,16 @@ def couriers():   # run all the actions related to courier menu
                         print(courier)
                 except Exception as e:
                     print("Error Found:", e)
-        elif couriers_option == "4":   # delete product from product list
+        elif couriers_option == "4":   # delete courier from courier list
+            cur.execute("SELECT * FROM couriers")
             couriers_list = cur.fetchall()
             for courier in couriers_list:
                 print(courier)
             courier_id = int(input("Enter the id of couriers to be deleted! "))
             try:
                 cur.execute("DELETE FROM couriers WHERE id = %s", courier_id)
-                couriers_list = cur.fetchall()
                 conn.commit()
+                couriers_list = cur.fetchall()
                 for courier in couriers_list:
                     print(courier)
             except Exception as e:

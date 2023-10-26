@@ -22,8 +22,8 @@ def order_list():       # print order list by different features
     order_list_options = input("Product List By: ")
     if order_list_options == "1":  # print order list by order id
         cur.execute("select * from orders")
-        orders_list = cur.fetchall()
-        for order in orders_list:
+        over_orders_list = cur.fetchall()
+        for order in over_orders_list:
             print(order)
     elif order_list_options == "2": # print order list by couriers
         print("List by Ascending(A) or Decending(D) Order? ")
@@ -42,6 +42,6 @@ def order_list():       # print order list by different features
             pass  #raise typeerror
     elif order_list_options == "3":
         cur.execute("SELECT * FROM orders o JOIN order_status os on o.order_status_id = os.order_status_id ORDER BY os.order_status")
-        orders_list = cur.fetchall()
-        for order in orders_list:
+        ori_orders_list = cur.fetchall()
+        for order in ori_orders_list:
             print(order)

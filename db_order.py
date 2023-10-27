@@ -79,21 +79,29 @@ def orders():       # execute all the actions related to order menu
             for order in orders_list:
                 print(order)
             order_id = int(input("Enter the id of order to be updated! "))
-            customer_name = input("Enter Customer's Name! ")
-            customer_address = input ("Enter Customer Address! ")
-            customer_phone = input("Enter Customer Phone Number! ")
-            cur.execute("SELECT * FROM products")
-            products_list = cur.fetchall()
-            for product in products_list:
-                print(product)
-            items = input("Entre Products' ID! (seperate with comma for more than 1 items)")
-            cur.execute("SELECT * FROM couriers")
-            couriers_list = cur.fetchall()
-            for courier in couriers_list:
-                print(courier)
-            couriers = int(input("Select Couriers by their ID! "))
             if order_id != "":
-                cur.execute("UPDATE orders SET (customer_name, customer_address, customer_phone, courier, items ) VALUES (%s, %s, %s, %s, %s)", (customer_name, customer_address, customer_phone, couriers, items))
+                customer_name = input("Enter Customer's Name! ")
+                cur.execute("UPDATE orders SET customer_name = %s WHERE id = %s", (customer_name, order_id))
+                conn.commit()
+                customer_address = input ("Enter Customer Address! ")
+                cur.execute("UPDATE orders SET  customer_address = %s WHERE id = %s", (customer_address, order_id))
+                conn.commit()
+                customer_phone = input("Enter Customer Phone Number! ")
+                cur.execute("UPDATE orders SET  customer_phone = %s WHERE id = %s", (customer_phone, order_id))
+                conn.commit()
+                cur.execute("SELECT * FROM products")
+                products_list = cur.fetchall()
+                for product in products_list:
+                    print(product)
+                items = input("Entre Products' ID! (seperate with comma for more than 1 items)")
+                cur.execute("UPDATE orders SET  items = %s WHERE id = %s", (items, order_id))
+                conn.commit()
+                cur.execute("SELECT * FROM couriers")
+                couriers_list = cur.fetchall()
+                for courier in couriers_list:
+                    print(courier)
+                couriers = int(input("Select Couriers by their ID! "))
+                cur.execute("UPDATE orders SET  courier = %s WHERE id = %s", (couriers, order_id))
                 conn.commit()
             elif order_id == "":
                 pass

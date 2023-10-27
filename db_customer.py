@@ -47,4 +47,4 @@ def customers():      # execute all the actions of customers
                 for customer in customers_list:
                     print(customer)
                 del_info = int(input("Please Entre ID of Customer"))
-                cur.execute("DELETE FROM customers WHERE id = %s", del_info)
+                cur.execute("DELETE FROM customers WHERE customer_id = %s", del_info)

@@ -26,21 +26,11 @@ def order_list():       # print order list by different features
         for order in over_orders_list:
             print(order)
     elif order_list_options == "2": # print order list by couriers
-        print("List by Ascending(A) or Decending(D) Order? ")
-        order_c_options = ("Please Enter A or D ! ")
-        if order_c_options == "A": # print order list by couriers in ascending
             cur.execute("SELECT * FROM orders ORDER BY courier")
             orders_a_list = cur.fetchall()
             for order in orders_a_list:
                 print(order)
-        if order_c_options == "D": # print order list by couriers in ascending
-            cur.execute("SELECT * FROM orders ORDER BY courier desc")
-            orders_d_list = cur.fetchall()
-            for order in orders_d_list:
-                print(order)
-        else:     # for pytest
-            pass  #raise typeerror
-    elif order_list_options == "3":
+    elif order_list_options == "3": # print order list by order status
         cur.execute("SELECT * FROM orders o JOIN order_status os on o.order_status_id = os.order_status_id ORDER BY os.order_status")
         ori_orders_list = cur.fetchall()
         for order in ori_orders_list:

@@ -24,10 +24,17 @@ def products():
         if products_option == "0":         # back to main menu
             break
         elif products_option == "1":       # list avaialable products
-            cur.execute("select * from products")
-            products_list = cur.fetchall()
-            for product in products_list:
-                print(product)
+            list_option = input("Looking for Product List(PL)/ Inventory(I)")
+            if list_option == "PL":
+                cur.execute("select * from products")
+                products_list = cur.fetchall()
+                for product in products_list:
+                    print(product)
+            elif list_option == "I":  # monitory of inventory
+                cur.execute("select * from inventory")
+                inventory_list = cur.fetchall()
+                for inventory in inventory_list:
+                    print(inventory)
         elif products_option == "2":      # add new products
             cur.execute("select * from products")
             products_list = cur.fetchall()

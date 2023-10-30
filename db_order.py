@@ -16,8 +16,9 @@ conn = pymysql.connect(
 host='localhost',
 database='baking_cafe',
 user='root',
-password='password')
-cur = conn.DictCursor()
+password='password',
+cursorclass=pymysql.cursors.DictCursor)
+cur = conn.cursor()
 
 def orders():       # execute all the actions related to order menu
     while True:
@@ -80,29 +81,36 @@ def orders():       # execute all the actions related to order menu
                 print(order)
             order_id = int(input("Enter the id of order to be updated! "))
             if order_id != "":
-                customer_name = input("Enter Customer's Name! ")
-                cur.execute("UPDATE orders SET customer_name = %s WHERE id = %s", (customer_name, order_id))
-                conn.commit()
-                customer_address = input ("Enter Customer Address! ")
-                cur.execute("UPDATE orders SET  customer_address = %s WHERE id = %s", (customer_address, order_id))
-                conn.commit()
-                customer_phone = input("Enter Customer Phone Number! ")
-                cur.execute("UPDATE orders SET  customer_phone = %s WHERE id = %s", (customer_phone, order_id))
-                conn.commit()
-                cur.execute("SELECT * FROM products")
-                products_list = cur.fetchall()
-                for product in products_list:
-                    print(product)
-                items = input("Entre Products' ID! (seperate with comma for more than 1 items)")
-                cur.execute("UPDATE orders SET  items = %s WHERE id = %s", (items, order_id))
-                conn.commit()
-                cur.execute("SELECT * FROM couriers")
-                couriers_list = cur.fetchall()
-                for courier in couriers_list:
-                    print(courier)
-                couriers = int(input("Select Couriers by their ID! "))
-                cur.execute("UPDATE orders SET  courier = %s WHERE id = %s", (couriers, order_id))
-                conn.commit()
+                print("1: Name, 2: Address, 3:Phone Number, 4:Items, 5:Courier ")
+                update_option = input("Which field to be edited? Please Enter Provided Number! ")
+                if update_option == "1":     # # update name
+                    customer_name = input("Enter Customer's Name! ")
+                    cur.execute("UPDATE orders SET customer_name = %s WHERE id = %s", (customer_name, order_id))
+                    conn.commit()
+                elif update_option == "2":   # update address
+                    customer_address = input ("Enter Customer Address! ")
+                    cur.execute("UPDATE orders SET  customer_address = %s WHERE id = %s", (customer_address, order_id))
+                    conn.commit()
+                elif update_option == "3":   # update phone number
+                    customer_phone = input("Enter Customer Phone Number! ")
+                    cur.execute("UPDATE orders SET  customer_phone = %s WHERE id = %s", (customer_phone, order_id))
+                    conn.commit()
+                elif update_option == "4":   # update items
+                    cur.execute("SELECT * FROM products")
+                    products_list = cur.fetchall()
+                    for product in products_list:
+                        print(product)
+                    items = input("Entre Products' ID! (seperate with comma for more than 1 items)")
+                    cur.execute("UPDATE orders SET  items = %s WHERE id = %s", (items, order_id))
+                    conn.commit()
+                elif update_option == "5":  # update couriers
+                    cur.execute("SELECT * FROM couriers")
+                    couriers_list = cur.fetchall()
+                    for courier in couriers_list:
+                        print(courier)
+                    couriers = int(input("Select Couriers by their ID! "))
+                    cur.execute("UPDATE orders SET  courier = %s WHERE id = %s", (couriers, order_id))
+                    conn.commit()
             elif order_id == "":
                 pass
         elif orders_option == "5":   # delete order from product list

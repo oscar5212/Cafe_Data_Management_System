@@ -15,8 +15,9 @@ conn = pymysql.connect(
 host='localhost',
 database='baking_cafe',
 user='root',
-password='password')
-cur = conn.DictCursor()
+password='password',
+cursorclass=pymysql.cursors.DictCursor)
+cur = conn.cursor()
 
 def couriers():   # run all the actions related to courier menu
     while True:

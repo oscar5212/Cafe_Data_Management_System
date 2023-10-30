@@ -5,8 +5,9 @@ def customer_menu():             # order Menu
     print("=====Customers Menu===")
     print("======================")
     print("====1) List Info======")
-    print("====2) Update Info====")
-    print("===3) Delete Info=====")
+    print("====2) Add New Info===")
+    print("====3) Update Info====")
+    print("===4) Delete Info=====")
     print("=0) Back to Main Menu=")
     print("======================")
 
@@ -24,8 +25,9 @@ conn = pymysql.connect(
 host='localhost',
 database='baking_cafe',
 user='root',
-password='password')
-cur = conn.DictCursor()
+password='password',
+cursorclass=pymysql.cursors.DictCursor)
+cur = conn.cursor()
 
 def customers():      # execute all the actions of customers
     while True:
@@ -38,7 +40,19 @@ def customers():      # execute all the actions of customers
             customers_list = cur.fetchall()
             for customer in customers_list:
                 print(customer)
-        elif customers_option == "2": # update customers info
+        elif customers_option == "2":
+            customer_name = input("Please Enter Name !")
+            customer_address = input ("Please Enter Address! ")
+            customer_phone = input("Please Enter Phone Number! ")
+            membership_option = input("Are you a member ? Y/N")
+            if membership_option == "Y":
+                memebr_number = input("Please Entre Your Menemrship Number! ")
+                cur.execute("INSERT INTO customers (customer_name, customer_address, customer_phone, member_number) VALUES (%s, %s, %s, %s)", (customer_name, customer_address, customer_phone, memebr_number))
+                conn.commit()
+            elif membership_option == "N":
+                cur.execute("INSERT INTO customers (customer_name, customer_address, customer_phone) VALUES (%s, %s, %s)", (customer_name, customer_address, customer_phone))
+                conn.commit()
+        elif customers_option == "3": # update customers info
             alter_menu()
             db_altercustomer.alter_info()
         elif customers_option == "3":  # delete opted out customer info

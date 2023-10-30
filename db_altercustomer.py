@@ -4,8 +4,9 @@ conn = pymysql.connect(    # connect to database
 host='localhost',
 database='baking_cafe',
 user='root',
-password='password')
-cur = conn.DictCursor()
+password='password',
+cursorclass=pymysql.cursors.DictCursor)
+cur = conn.cursor()
 
 def alter_info():         # adment customer information
     cur.execute("SELECT * FROM customers")    # list all cusomter info with id
@@ -13,6 +14,7 @@ def alter_info():         # adment customer information
     for customer in customers_list:
         print(customer)
     customer_id = int(input("Choose a ID to update reocrd! "))
+    print("1: Name, 2:Address, 3:Phone Number,4:Membership Number")
     alter_options = input("Which info needs to be updated? ")
     if alter_options == "1":   # update cusomter name
         customer_name =  input("Enter Customer's Name! ")

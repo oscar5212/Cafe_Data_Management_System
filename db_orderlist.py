@@ -5,7 +5,7 @@ host='localhost',
 database='baking_cafe',
 user='root',
 password='password')
-cur = conn.cursor()
+cur = conn.DictCursor()
 
 
 def order_list_menu():           # Order list menu

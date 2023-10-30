@@ -17,7 +17,7 @@ host='localhost',
 database='baking_cafe',
 user='root',
 password='password')
-cur = conn.cursor()
+cur = conn.DictCursor()
 
 def orders():       # execute all the actions related to order menu
     while True:

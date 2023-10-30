@@ -5,7 +5,7 @@ host='localhost',
 database='baking_cafe',
 user='root',
 password='password')
-cur = conn.cursor()
+cur = conn.DictCursor()
 
 def alter_info():         # adment customer information
     cur.execute("SELECT * FROM customers")    # list all cusomter info with id

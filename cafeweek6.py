@@ -23,27 +23,28 @@ host='localhost',
 database='baking_cafe',
 user='root',
 password='password')
-cur = conn.cursor()
+cur = conn.DictCursor()
 print('Connecting Database Successful! ')
 
+while True:
+    main_menu()    # call Main Menu
+    main_option = input("What are you going to do? ")
 
-main_menu()    # call Main Menu
-main_option = input("What are you going to do? ")
+    if main_option == "0": # exit the application
+        cur.close()
+        break
+        exit
 
-if main_option == "0": # exit the application
-    cur.close()
-    exit
-    
-if main_option == "1":  # Enter Product Menu
-    db_product.products()   # execute all actions in Product Menu
-
-
-elif main_option == "2": # Enter Couriers Menu
-    db_courier.couriers()   # execute all actions in Courier Menu
+    if main_option == "1":  # Enter Product Menu
+        db_product.products()   # execute all actions in Product Menu
 
 
-elif main_option == "3":  # Enter Order Menu
-    db_order.orders()   # execute all actions in Order Menu
+    elif main_option == "2": # Enter Couriers Menu
+        db_courier.couriers()   # execute all actions in Courier Menu
 
-elif main_option == "4":  # Enter Customer Menu
-    db_customer.customers()  # execute all actions in Cusotmer Menu
+
+    elif main_option == "3":  # Enter Order Menu
+        db_order.orders()   # execute all actions in Order Menu
+
+    elif main_option == "4":  # Enter Customer Menu
+        db_customer.customers()  # execute all actions in Cusotmer Menu

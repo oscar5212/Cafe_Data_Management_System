@@ -16,7 +16,7 @@ host='localhost',
 database='baking_cafe',
 user='root',
 password='password')
-cur = conn.cursor()
+cur = conn.DictCursor()
 
 def couriers():   # run all the actions related to courier menu
     while True:

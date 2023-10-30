@@ -39,7 +39,7 @@ def customers():      # execute all the actions of customers
             cur.execute("SELECT * FROM customers")
             customers_list = cur.fetchall()
             for customer in customers_list:
-                print(customer)
+                print(str(customer).strip("{").replace("}","\n"))
         elif customers_option == "2":
             customer_name = input("Please Enter Name !")
             customer_address = input ("Please Enter Address! ")
@@ -59,6 +59,11 @@ def customers():      # execute all the actions of customers
                 cur.execute("SELECT * FROM customers")
                 customers_list = cur.fetchall()
                 for customer in customers_list:
-                    print(customer)
+                    print(str(customer).strip("{").replace("}","\n"))
                 del_info = int(input("Please Entre ID of Customer"))
                 cur.execute("DELETE FROM customers WHERE customer_id = %s", del_info)
+                conn.commit()
+                cur.execute("SELECT * FROM customers")
+                customers_list = cur.fetchall()
+                for customer in customers_list:
+                    print(str(customer).strip("{").replace("}","\n"))

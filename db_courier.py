@@ -29,7 +29,7 @@ def couriers():   # run all the actions related to courier menu
             cur.execute("SELECT * FROM couriers")
             couriers_list = cur.fetchall()
             for courier in couriers_list:
-                print(courier)
+                print(str(courier).strip("{").replace("}","\n"))
         elif couriers_option == "2":      # add new products
             new_name = input("Enter New Courier's Name! ")
             new_phone = float(input ("Enter New Phone Number! "))
@@ -39,14 +39,14 @@ def couriers():   # run all the actions related to courier menu
                 cur.execute("SELECT * FROM couriers")
                 couriers_list = cur.fetchall()
                 for courier in couriers_list:
-                    print(courier)
+                    print(str(courier).strip("{").replace("}","\n"))
             except Exception as e:
                 print("Error Found:", e)
         elif couriers_option == "3":    # update products list
             cur.execute("SELECT * FROM couriers")
             couriers_list = cur.fetchall()
             for courier in couriers_list:
-                print(courier)
+                print(str(courier).strip("{").replace("}","\n"))
             courier_id = int(input("Enter ID of Couriers!"))
             new_name = input("Enter New Name of Courier! ")
             new_phone = (input("Enter New Phone Number! "))
@@ -65,20 +65,20 @@ def couriers():   # run all the actions related to courier menu
                     cur.execute("SELECT * FROM couriers")
                     couriers_list = cur.fetchall()
                     for courier in couriers_list:
-                        print(courier)
+                        print(str(courier).strip("{").replace("}","\n"))
                 except Exception as e:
                     print("Error Found:", e)
         elif couriers_option == "4":   # delete courier from courier list
             cur.execute("SELECT * FROM couriers")
             couriers_list = cur.fetchall()
             for courier in couriers_list:
-                print(courier)
+                print(str(courier).strip("{").replace("}","\n"))
             courier_id = int(input("Enter the id of couriers to be deleted! "))
             try:
                 cur.execute("DELETE FROM couriers WHERE id = %s", courier_id)
                 conn.commit()
                 couriers_list = cur.fetchall()
                 for courier in couriers_list:
-                    print(courier)
+                    print(str(courier).strip("{").replace("}","\n"))
             except Exception as e:
                 print("Error Found:", e)

@@ -12,7 +12,7 @@ def alter_info():         # adment customer information
     cur.execute("SELECT * FROM customers")    # list all cusomter info with id
     customers_list = cur.fetchall()
     for customer in customers_list:
-        print(customer)
+        print(str(customer).strip("{").replace("}","\n"))
     customer_id = int(input("Choose a ID to update reocrd! "))
     print("1: Name, 2:Address, 3:Phone Number,4:Membership Number")
     alter_options = input("Which info needs to be updated? ")
@@ -35,4 +35,4 @@ def alter_info():         # adment customer information
     cur.execute("SELECT * FROM customers")
     customers_list = cur.fetchall()
     for customer in customers_list:
-        print(customer)
+        print(str(customer).strip("{").replace("}","\n"))

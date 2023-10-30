@@ -35,12 +35,12 @@ def orders():       # execute all the actions related to order menu
             cur.execute("SELECT * FROM products")
             products_list = cur.fetchall()
             for product in products_list:
-                print(product)
+                print(str(product).strip("{").replace("}","\n"))
             items = input("Entre Products' ID! (seperate with comma for more than 1 item)")
             cur.execute("SELECT * FROM couriers")
             couriers_list = cur.fetchall()
             for courier in couriers_list:
-                print(courier)
+                print(str(courier).strip("{").replace("}","\n"))
             couriers = int(input("Select Couriers by their ID! "))
             status = "preparing"
             cur.execute("INSERT INTO order_status (order_status) VALUES (%s)", (status))
@@ -48,37 +48,38 @@ def orders():       # execute all the actions related to order menu
             cur.execute("SELECT * FROM order_status")
             order_status_list = cur.fetchall()
             for order_status in order_status_list:
-                print(order_status)
-            order_status_id = int(input("Please Entre order status id !" ))
+                print(str(order_status).strip("{").replace("}","\n"))
+            order_status_id = int(input("Please Entre the last order status id !" ))
             try:
                 cur.execute("INSERT INTO orders (customer_name, customer_address, customer_phone, courier, order_status_id, items ) VALUES (%s, %s, %s, %s, %s, %s)", (customer_name, customer_address, customer_phone, couriers, order_status_id, items))
                 conn.commit()
                 cur.execute("SELECT * FROM orders")
                 orders_list = cur.fetchall()
                 for order in orders_list:
-                    print(order)
+                    print(str(order).strip("{").replace("}","\n"))
             except Exception as e:
                 print("Error Found:", e)
         elif orders_option == "3":    # update order status
             cur.execute("SELECT * FROM orders o JOIN order_status os on o.order_status_id = os.order_status_id ")
             orders_list = cur.fetchall()
             for order in orders_list:
-                print(order)
+                print(str(order).strip("{").replace("}","\n"))
             order_status_id = int(input("Enter Updated Order Status ID! "))
+            print("Order Status Can be: preparing / Ready to be Delivered or Collected / Delivered or Collected! ")
             order_status = input("Update Order Status! ")
             try:
                 cur.execute("UPDATE order_status SET order_status = %s where order_status_id = %s", (order_status, order_status_id))
                 conn.commit()
                 orders_status_list = cur.fetchall()
                 for status in orders_status_list:
-                    print(status)
+                    print(str(status).strip("{").replace("}","\n"))
             except Exception as e:
                 print("Error Found:", e)
         elif orders_option == "4":   # update orders
             cur.execute("SELECT * FROM orders")
             orders_list = cur.fetchall()
             for order in orders_list:
-                print(order)
+                print(str(order).strip("{").replace("}","\n"))
             order_id = int(input("Enter the id of order to be updated! "))
             if order_id != "":
                 print("1: Name, 2: Address, 3:Phone Number, 4:Items, 5:Courier ")
@@ -99,7 +100,7 @@ def orders():       # execute all the actions related to order menu
                     cur.execute("SELECT * FROM products")
                     products_list = cur.fetchall()
                     for product in products_list:
-                        print(product)
+                        print(str(product).strip("{").replace("}","\n"))
                     items = input("Entre Products' ID! (seperate with comma for more than 1 items)")
                     cur.execute("UPDATE orders SET  items = %s WHERE id = %s", (items, order_id))
                     conn.commit()
@@ -107,7 +108,7 @@ def orders():       # execute all the actions related to order menu
                     cur.execute("SELECT * FROM couriers")
                     couriers_list = cur.fetchall()
                     for courier in couriers_list:
-                        print(courier)
+                        print(str(courier).strip("{").replace("}","\n"))
                     couriers = int(input("Select Couriers by their ID! "))
                     cur.execute("UPDATE orders SET  courier = %s WHERE id = %s", (couriers, order_id))
                     conn.commit()
@@ -117,13 +118,13 @@ def orders():       # execute all the actions related to order menu
             cur.execute("SELECT * FROM orders")
             orders_list = cur.fetchall()
             for order in orders_list:
-                print(order)
+                print(str(order).strip("{").replace("}","\n"))
             order_id = int(input("Enter the id of order to be deleted! "))
             try:
                 cur.execute("DELETE FROM orders WHERE id = %s", order_id)
                 orders_list = cur.fetchall()
                 conn.commit()
                 for order in orders_list:
-                    print(order)
+                    print(str(order).strip("{").replace("}","\n"))
             except Exception as e:
                 print("Error Found:", e)

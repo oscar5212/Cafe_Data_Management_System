@@ -25,14 +25,14 @@ def order_list():       # print order list by different features
         cur.execute("select * from orders")
         over_orders_list = cur.fetchall()
         for order in over_orders_list:
-            print(order)
+            print(str(order).strip("{").replace("}","\n"))
     elif order_list_options == "2": # print order list by couriers
             cur.execute("SELECT * FROM orders ORDER BY courier")
             orders_a_list = cur.fetchall()
             for order in orders_a_list:
-                print(order)
+                print(str(order).strip("{").replace("}","\n"))
     elif order_list_options == "3": # print order list by order status
         cur.execute("SELECT * FROM orders o JOIN order_status os on o.order_status_id = os.order_status_id ORDER BY os.order_status")
         ori_orders_list = cur.fetchall()
         for order in ori_orders_list:
-            print(order)
+            print(str(order).strip("{").replace("}","\n"))

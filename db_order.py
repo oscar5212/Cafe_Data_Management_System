@@ -8,7 +8,7 @@ def order_menu():             # order Menu
     print("===2) Add Orders======")
     print("===3) Update Status===")
     print("===4) Update Orders===")
-    print("==5) Delete Products==")
+    print("==5) Delete Orderss==")
     print("=0) Back to Main Menu=")
     print("======================")
 
@@ -114,7 +114,7 @@ def orders():       # execute all the actions related to order menu
                     conn.commit()
             elif order_id == "":
                 pass
-        elif orders_option == "5":   # delete order from product list
+        elif orders_option == "5":   # delete order from order list
             cur.execute("SELECT * FROM orders")
             orders_list = cur.fetchall()
             for order in orders_list:

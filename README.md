@@ -37,7 +37,8 @@ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass mysql
 mysql -h 127.0.0.1 -P3306 -uroot -p
 ```
 
-**PySQL**
+**PySQL**\
+Installation of extention PySQL
 ```PySQL
 pip install pymysql
 ```

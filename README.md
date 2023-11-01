@@ -100,5 +100,5 @@ During the process of editing, importing and exporting customers 'data, the hand
 ## Enjoyment
 The satisfaction of this project lies in the sense of accomplishment that comes with achieving goals and overcoming challenges while developing an application from scratch to one with multiple options. In this process, persistence and problem-solving skills are essential, as there are numerous errors and bugs that need to be fixed in the development cycle. With a troubleshooting mindset, developing an application is not a daunting task. Additionally, being resourceful is an important quality that shines through in this process, especially when peers are not available to help.
 
-### Author
+## Author
 Oscar Choy

@@ -1,5 +1,0 @@
-customer_name, customer_address, customer_phone, courier, status, items
-
-John,"Unit 2, 12 Main Street, LONDON, WH1 2ER",0789887334,2,preparing,"1 & 3 & 4"
-
-Lenon,"221 High Street, LONDON",0787669212,1,preparing,3
